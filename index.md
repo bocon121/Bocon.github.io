@@ -2,9 +2,7 @@
  <body>
   <h1> landing Page </h1>
    <p> Test page please ignore </p>
-  <!-- Start of SimpleHitCounter Code -->
-<div align="center"><a href="http://www.simplehitcounter.com" target="_blank"><img src="http://simplehitcounter.com/hit.php?uid=0&f=16777215&b=0" border="0" height="18" width="83" alt="web counter"></a><br><a href="http://www.simplehitcounter.com" target="_blank" style="text-decoration:none;">web counter</a></div>
-<!-- End of SimpleHitCounter Code -->
+<a href="http://www.reliablecounter.com" target="_blank"><img src="https://www.reliablecounter.com/count.php?page=boncon.pw&digit=style/plain/1/&reloads=0" alt="" title="" border="0"></a><br /><a href="http://www.viscose.fr" target="_blank" style="font-family: Geneva, Arial; font-size: 9px; color: #330010; text-decoration: none;">rayon</a>
 
  </body>
 </html>
