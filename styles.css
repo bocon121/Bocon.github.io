@@ -1,68 +1,87 @@
+/* Reset some default styles and apply a background color */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: Arial, sans-serif;
-    background-color: #282c34;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
+    background-color: #f4f4f4;
 }
 
+/* Style the header with a background image */
 header {
-    text-align: center;
-    padding: 50px 0;
+    background-image: url('header-image.jpg'); /* Replace with your image */
+    background-size: cover;
+    color: #fff;
 }
 
-header h1 {
-    font-size: 2em;
-    margin: 0;
+/* Add some styles to the navigation */
+nav {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
 }
-
-header p {
-    font-size: 1.2em;
-    margin: 10px 0;
-}
-
 nav ul {
-    list-style-type: none;
-    padding: 0;
-    text-align: center;
+    list-style: none;
+    text-align: right;
 }
-
-nav li {
+nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin-right: 20px;
 }
-
 nav a {
     text-decoration: none;
-    color: #ffffff;
-    font-size: 1.2em;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+nav a:hover {
+    color: #ff9900; /* Highlight color on hover */
 }
 
-section {
-    padding: 50px;
+/* Style the hero section */
+.hero {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 100px 0;
     text-align: center;
 }
-
-section h2 {
-    font-size: 2em;
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+.hero p {
+    font-size: 18px;
+    color: #ff9900;
 }
 
-section p {
-    font-size: 1.2em;
+/* Style content sections */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+p {
+    font-size: 16px;
 }
 
+/* Style the footer */
 footer {
+    background-color: #333;
+    color: #fff;
     text-align: center;
-    background-color: #1c1c1c;
     padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }
 
-footer p {
-    font-size: 0.8em;
-    margin: 0;
+/* Add media queries for responsiveness */
+@media screen and (max-width: 768px) {
+    nav ul {
+        text-align: center;
+    }
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
 }
-
-/* Add more styles or customize as needed */
