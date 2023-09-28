@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Hide the loading screen when the content is fully loaded
+    setTimeout(function () {
+        document.querySelector(".loading-screen").style.display = "none";
+    }, 2000); // Adjust the delay (in milliseconds) as needed
+
     // Show/hide the "Back to Top" button
     const backToTopButton = document.getElementById("back-to-top");
 
@@ -17,11 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
             behavior: "smooth",
         });
     });
-
-    // Hide the welcome screen when the content is fully loaded
-    setTimeout(function () {
-        document.querySelector(".welcome-screen").style.display = "none";
-    }, 2000); // Adjust the delay (in milliseconds) as needed
 
     // Scroll Animation
     const sections = document.querySelectorAll("section");
