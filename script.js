@@ -1,4 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Show/hide the "Back to Top" button
+    const backToTopButton = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+
+    // Scroll to top when the button is clicked
+    backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    });
+
     // Hide the welcome screen when the content is fully loaded
     setTimeout(function () {
         document.querySelector(".welcome-screen").style.display = "none";
@@ -20,26 +39,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sections.forEach((section) => {
         sectionObserver.observe(section);
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Show/hide the "Back to Top" button
-    const backToTopButton = document.getElementById("back-to-top");
-
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    });
-
-    // Scroll to top when the button is clicked
-    backToTopButton.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
     });
 });
