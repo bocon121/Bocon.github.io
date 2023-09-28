@@ -5,7 +5,8 @@ body, h1, h2, p {
 }
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #333; /* Dark grey background color */
+    color: #fff; /* White text color */
 }
 
 /* Style the header with a background image */
@@ -17,7 +18,7 @@ header {
 
 /* Add some styles to the navigation */
 nav {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent black background */
     padding: 10px 0;
 }
 nav ul {
@@ -40,7 +41,7 @@ nav a:hover {
 
 /* Style the hero section */
 .hero {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent black background */
     padding: 100px 0;
     text-align: center;
 }
@@ -50,7 +51,7 @@ nav a:hover {
 }
 .hero p {
     font-size: 18px;
-    color: #ff9900;
+    color: #ff9900; /* Highlight color for text */
 }
 
 /* Style content sections */
@@ -69,7 +70,7 @@ p {
 
 /* Style the footer */
 footer {
-    background-color: #333;
+    background-color: #222; /* Darker grey footer background */
     color: #fff;
     text-align: center;
     padding: 10px 0;
