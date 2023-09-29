@@ -8,8 +8,8 @@
 /* Global styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    color: #333;
+    background-color: #3e3e3e;
+    color:  #f2f2f2;
     line-height: 1.6;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 a {
-    color: #3498db;
+    color: #3e3e3e;
     text-decoration: none;
 }
 
@@ -35,7 +35,7 @@ a:hover {
 
 /* Header */
 header {
-    background-color: #3498db;
+    background-color: #3e3e3e;
     padding: 40px 0;
 }
 
