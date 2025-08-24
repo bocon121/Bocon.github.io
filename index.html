@@ -1,39 +1,626 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>BOCON - Aviation Tools & Services</title>
     <link rel="icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    :root {
+        --primary-color: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary-color: #64748b;
+        --accent-color: #f59e0b;
+        --background: #ffffff;
+        --surface: #f8fafc;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: var(--background);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    /* Header */
+    header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        color: white;
+        padding: 4rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    header .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    header h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ffffff, #e2e8f0);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header p {
+        font-size: 1.5rem;
+        opacity: 0.9;
+        font-weight: 300;
+    }
+
+    /* Navigation */
+    nav {
+        background: var(--background);
+        padding: 1rem 0;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+        padding: 5rem 0;
+        position: relative;
+    }
+
+    section:nth-child(even) {
+        background: var(--surface);
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+        position: relative;
+    }
+
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4rem;
+        height: 3px;
+        background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+        border-radius: 2px;
+    }
+
+    p {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        max-width: 65ch;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Calculator Styles */
+    .calculator-container {
+        background: var(--background);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        max-width: 480px;
+        margin: 3rem auto 0;
+        transition: all 0.3s ease;
+    }
+
+    .calculator-container:hover {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .calculator-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .calculator-header h3 {
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .calculator-header p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 0;
+    }
+
+    .input-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.875rem;
+        border: 2px solid var(--border-color);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: var(--surface);
+    }
+
+    input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background: var(--background);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .units {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .unit-toggle {
+        flex: 1;
+        padding: 0.75rem;
+        border: 2px solid var(--border-color);
+        border-radius: 0.5rem;
+        background: var(--surface);
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s ease;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .unit-toggle.active {
+        border-color: var(--primary-color);
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .calculate-btn {
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        color: white;
+        border: none;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+
+    .calculate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .result {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        text-align: center;
+        font-size: 1.125rem;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+        margin-bottom: 1rem;
+    }
+
+    .result.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .formula-info {
+        background: var(--surface);
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border-left: 4px solid var(--primary-color);
+        margin-top: 1rem;
+    }
+
+    .formula-info h4 {
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .formula-info p {
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .formula {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        text-align: center;
+        margin: 0.75rem 0;
+        font-size: 0.875rem;
+    }
+
+    /* Contact Section */
+    #contact {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        color: white;
+    }
+
+    #contact h2 {
+        color: white;
+    }
+
+    #contact p {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Footer */
+    footer {
+        background: var(--text-primary);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+    }
+
+    footer p {
+        margin: 0;
+        opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 1rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.125rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        nav ul {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .calculator-container {
+            margin: 2rem auto 0;
+            padding: 1.5rem;
+        }
+    }
+
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Loading animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-in {
+        animation: fadeInUp 0.8s ease forwards;
+    }
+</style>
+```
+
 </head>
 <body>
     <header>
         <div class="container">
             <h1 class="center">BOCON</h1>
-            <p class="center">Welcome to our self-hosted website</p>
+            <p class="center">Professional Aviation Tools & Services</p>
         </div>
     </header>
 
-    <section id="about">
-        <div class="container">
-            <h2 class="center">About Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed a magna sit amet risus.</p>
-            <p>Phasellus ornare, ex a mattis dignissim, nisl ligula blandit purus, sit amet lacinia lectus elit sit amet odio. Sed at hendrerit odio, et sodales ante. Cras auctor tristique odio, et consectetur metus. Fusce in lectus justo.</p>
-        </div>
-    </section>
+```
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="center">Contact Us</h2>
-            <p>If you have any questions or feedback, please don't hesitate to contact us.</p>
-        </div>
-    </section>
+<section id="about">
+    <div class="container">
+        <h2 class="center">About Us</h2>
+        <p>BOCON provides cutting-edge aviation tools and services designed for pilots, aviation enthusiasts, and industry professionals. Our mission is to deliver accurate, reliable, and easy-to-use resources that enhance flight safety and operational efficiency.</p>
+        <p>With years of experience in the aviation industry, we understand the critical importance of precise calculations and real-time data in flight operations. Our tools are built with the highest standards of accuracy and user experience in mind.</p>
+    </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 BOCON</p>
+<section id="tools">
+    <div class="container">
+        <h2 class="center">Aviation Tools</h2>
+        <p class="center">Professional-grade calculators and utilities for aviation professionals.</p>
+        
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h3>✈️ Pressure Altitude Calculator</h3>
+                <p>Calculate pressure altitude for flight planning and performance</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="pressure">Current Barometric Pressure</label>
+                <input type="number" id="pressure" step="0.01" placeholder="Enter pressure (e.g., 1013.25)" />
+            </div>
+            
+            <div class="units">
+                <div class="unit-toggle active" data-unit="hpa" onclick="switchUnit('hpa')">
+                    Hectopascals (hPa)
+                </div>
+                <div class="unit-toggle" data-unit="inhg" onclick="switchUnit('inhg')">
+                    Inches Hg (inHg)
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculatePressureAltitude()">
+                Calculate Pressure Altitude
+            </button>
+            
+            <div class="result" id="result"></div>
+            
+            <div class="formula-info">
+                <h4>Calculation Method:</h4>
+                <div class="formula" id="formula">
+                    Pressure Altitude (ft) = (1013.25 - Current Pressure hPa) × 30
+                </div>
+                <p><strong>Standard Sea Level Pressure:</strong> <span id="standard-pressure">1013.25 hPa</span> (29.92 inHg)</p>
+                <p><strong>Conversion Factor:</strong> ~30 feet per hectopascal</p>
+                <p>Positive values indicate altitude above sea level, negative values indicate below sea level in standard atmosphere.</p>
+            </div>
         </div>
-    </footer>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <h2 class="center">Contact Us</h2>
+        <p class="center">Have questions about our tools or need support? We're here to help aviation professionals succeed.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 BOCON - Aviation Tools & Services</p>
+    </div>
+</footer>
+
+<script>
+    let currentUnit = 'hpa';
+    
+    function switchUnit(unit) {
+        currentUnit = unit;
+        
+        // Update active toggle
+        document.querySelectorAll('.unit-toggle').forEach(toggle => {
+            toggle.classList.remove('active');
+        });
+        document.querySelector(`[data-unit="${unit}"]`).classList.add('active');
+        
+        // Update placeholders and labels
+        const input = document.getElementById('pressure');
+        const formula = document.getElementById('formula');
+        const standardPressure = document.getElementById('standard-pressure');
+        
+        if (unit === 'hpa') {
+            input.placeholder = 'Enter pressure (e.g., 1013.25)';
+            formula.textContent = 'Pressure Altitude (ft) = (1013.25 - Current Pressure hPa) × 30';
+            standardPressure.textContent = '1013.25 hPa';
+        } else {
+            input.placeholder = 'Enter pressure (e.g., 29.92)';
+            formula.textContent = 'Pressure Altitude (ft) = (29.92 - Current Pressure inHg) × 1000';
+            standardPressure.textContent = '29.92 inHg';
+        }
+        
+        // Clear previous result
+        document.getElementById('result').classList.remove('show');
+    }
+    
+    function calculatePressureAltitude() {
+        const pressureInput = document.getElementById('pressure');
+        const resultDiv = document.getElementById('result');
+        
+        const pressure = parseFloat(pressureInput.value);
+        
+        if (isNaN(pressure) || pressure <= 0) {
+            resultDiv.innerHTML = '⚠️ Please enter a valid pressure value';
+            resultDiv.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            resultDiv.classList.add('show');
+            return;
+        }
+        
+        let pressureAltitude;
+        
+        if (currentUnit === 'hpa') {
+            pressureAltitude = (1013.25 - pressure) * 30;
+        } else {
+            pressureAltitude = (29.92 - pressure) * 1000;
+        }
+        
+        // Format the result
+        const formattedAltitude = Math.round(pressureAltitude);
+        const sign = pressureAltitude >= 0 ? '+' : '';
+        
+        // Determine if above or below sea level
+        const altitudeDescription = pressureAltitude >= 0 ? 'above sea level' : 'below sea level';
+        
+        resultDiv.innerHTML = `
+            <div style="font-size: 1.25em; margin-bottom: 0.5rem;">
+                ${sign}${formattedAltitude.toLocaleString()} feet
+            </div>
+            <div style="font-size: 0.875em; opacity: 0.9;">
+                ${altitudeDescription} in standard atmosphere
+            </div>
+        `;
+        
+        resultDiv.style.background = pressureAltitude >= 0 
+            ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+            : 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+        
+        resultDiv.classList.add('show');
+    }
+    
+    // Allow Enter key to calculate
+    document.getElementById('pressure').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            calculatePressureAltitude();
+        }
+    });
+    
+    // Auto-calculate on input change after a short delay
+    let inputTimer;
+    document.getElementById('pressure').addEventListener('input', function() {
+        clearTimeout(inputTimer);
+        inputTimer = setTimeout(() => {
+            if (this.value.trim() !== '') {
+                calculatePressureAltitude();
+            }
+        }, 1000);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe sections for animation
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+```
+
 </body>
 </html>
