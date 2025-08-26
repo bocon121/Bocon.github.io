@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TAS Calculator (IAS + ISA Dev + Elevation)</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 0; background:#0b0c10; color:#e6e6e6; }
+    .wrap { max-width: 720px; margin: 40px auto; padding: 24px; background:#14161a; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    h1 { margin: 0 0 8px; font-size: 1.4rem; }
+    p.sub { margin: 0 0 20px; opacity: .8; }
+    .grid { display: grid; gap: 14px; grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 720px){ .grid { grid-template-columns: 1fr; } }
+    label { display: block; font-size: .9rem; margin-bottom: 6px; opacity: .9; }
+    input[type="number"] {
+      width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid #2a2e35;
+      background: #0f1115; color: #e6e6e6; outline: none;
+    }
+    input[type="number"]:focus { border-color:#5865f2; box-shadow: 0 0 0 3px rgba(88,101,242,.25); }
+    .out {
+      margin-top: 18px; padding: 16px; border-radius: 12px; background: #0f1115; border: 1px solid #2a2e35;
+      display:flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .out .label { opacity: .85; }
+    .out .val { font-size: 1.8rem; font-weight: 700; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem; }
+    .footer { margin-top: 12px; opacity: .7; font-size: .85rem; }
+    .row { display:flex; gap:10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .small { font-size: .85rem; opacity: .85; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>TAS Calculator</h1>
+    <p class="sub">Uses your formula with <span class="mono">pressure altitude = elevation + 1000 ft</span> and adds a fixed <span class="mono">+25 kt</span> tailwind.</p>
+
+    <div class="grid">
+      <div>
+        <label for="ias">Indicated Airspeed (kt)</label>
+        <input id="ias" type="number" inputmode="decimal" placeholder="e.g. 150" value="150" step="0.1" />
+      </div>
+      <div>
+        <label for="isa">ISA Deviation (°C)</label>
+        <input id="isa" type="number" inputmode="decimal" placeholder="e.g. 10" value="10" step="0.1" />
+      </div>
+      <div>
+        <label for="elev">Aerodrome Elevation (ft)</label>
+        <input id="elev" type="number" inputmode="decimal" placeholder="e.g. 2000" value="2000" step="1" />
+      </div>
+    </div>
+
+    <div class="out">
+      <div class="label">True Airspeed (TAS)</div>
+      <div class="val"><span id="tas">—</span> kt</div>
+    </div>
+
+    <div class="row">
+      <div class="small">Formula:</div>
+      <div class="mono" style="overflow:auto">
+        = ( IAS × 171233 × √(288 + ISAdev − 0.00198 × (Elev + 1000)) ) ÷ (288 − 0.00198 × (Elev + 1000))^2.628 + 25
+      </div>
+    </div>
+
+    <p class="footer">Notes: constants are baked in; result updates as you type. Inputs outside realistic ranges may produce unrealistic outputs.</p>
+  </main>
+
+  <script>
+    (function () {
+      const ias = document.getElementById('ias');
+      const isa = document.getElementById('isa');
+      const elev = document.getElementById('elev');
+      const out = document.getElementById('tas');
+
+      const K0 = 288;           // Standard temp at sea level (K)
+      const LAPSE = 0.00198;    // K/ft
+      const K1 = 171233;        // Constant from your formula
+      const EXP = 2.628;        // Exponent from your formula
+      const TAILWIND = 25;      // Fixed +25 kt
+
+      function calc() {
+        const IAS = Number(ias.value);
+        const ISAdev = Number(isa.value);
+        const Elev = Number(elev.value);
+
+        if (!isFinite(IAS) || !isFinite(ISAdev) || !isFinite(Elev)) {
+          out.textContent = '—';
+          return;
+        }
+
+        const h = Elev + 1000; // pressure altitude offset
+        const topRootArg = K0 + ISAdev - (LAPSE * h);
+        const bottomBase = K0 - (LAPSE * h);
+
+        // Guard against negative/zero roots or denominators
+        if (topRootArg <= 0 || bottomBase <= 0) {
+          out.textContent = '—';
+          return;
+        }
+
+        const numerator = IAS * K1 * Math.sqrt(topRootArg);
+        const denominator = Math.pow(bottomBase, EXP);
+        const tas = (numerator / denominator) + TAILWIND;
+
+        out.textContent = Number.isFinite(tas) ? tas.toFixed(1) : '—';
+      }
+
+      ['input', 'change'].forEach(evt => {
+        ias.addEventListener(evt, calc);
+        isa.addEventListener(evt, calc);
+        elev.addEventListener(evt, calc);
+      });
+
+      calc();
+    })();
+  </script>
+</body>
+</html>
